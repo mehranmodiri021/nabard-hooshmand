@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "User": {
+      "path": "users/{userId}",
+      "description": "User profile, balance, level, and stats",
+      "fields": {
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "level": { "type": "number" },
+        "xp": { "type": "number" },
+        "totalPoints": { "type": "number" },
+        "balanceToman": { "type": "number" },
+        "totalCashWonToman": { "type": "number" },
+        "tournamentsPlayed": { "type": "number" },
+        "wins": { "type": "number" },
+        "isAdmin": { "type": "boolean" },
+        "bio": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Tournament": {
+      "path": "tournaments/{tournamentId}",
+      "description": "Active, upcoming, and finished challenges and competitions",
+      "fields": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "entryFeeToman": { "type": "number" },
+        "prizePoolToman": { "type": "number" },
+        "maxParticipants": { "type": "number" },
+        "currentParticipants": { "type": "number" },
+        "difficulty": { "type": "string" },
+        "status": { "type": "string" },
+        "startsInSeconds": { "type": "number" },
+        "isHotOrSpecial": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "Question": {
+      "path": "tournaments/{tournamentId}/questions/{questionId}",
+      "description": "Competition questions with four options and time limits",
+      "fields": {
+        "question": { "type": "string" },
+        "options": { "type": "list" },
+        "correctIndex": { "type": "number" },
+        "explanation": { "type": "string" },
+        "category": { "type": "string" },
+        "timeLimitSeconds": { "type": "number" },
+        "basePoints": { "type": "number" }
+      }
+    },
+    "ScoreRecord": {
+      "path": "tournaments/{tournamentId}/scores/{userId}",
+      "description": "Validated user performance and anti-cheat verified scores",
+      "fields": {
+        "userId": { "type": "string" },
+        "scoreEarned": { "type": "number" },
+        "correctCount": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "rank": { "type": "number" },
+        "prizeWonToman": { "type": "number" },
+        "verifiedAt": { "type": "timestamp" }
+      }
+    },
+    "Transaction": {
+      "path": "transactions/{transactionId}",
+      "description": "Financial ledger for deposits, withdrawals, prizes, and fees",
+      "fields": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "amountToman": { "type": "number" },
+        "type": { "type": "string" },
+        "status": { "type": "string" },
+        "datePersian": { "type": "string" },
+        "trackingCode": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "Withdrawal": {
+      "path": "withdrawals/{withdrawalId}",
+      "description": "Cash prize settlement requests to bank IBAN",
+      "fields": {
+        "userId": { "type": "string" },
+        "amountToman": { "type": "number" },
+        "shabaIban": { "type": "string" },
+        "cardNumber": { "type": "string" },
+        "accountHolder": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      }
+    }
+  }
+}

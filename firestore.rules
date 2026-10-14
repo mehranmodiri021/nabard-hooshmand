@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Role-based admin check verified via token claims or existing user document
+    // (Never by display name or hardcoded string)
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.role == 'ADMIN' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+      );
+    }
+
+    // User profile documents
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      // On creation, regular user cannot grant themselves ADMIN role or arbitrary balance
+      allow create: if isOwner(userId) && 
+        (!('role' in request.resource.data) || request.resource.data.role == 'USER') &&
+        (!('isAdmin' in request.resource.data) || request.resource.data.isAdmin == false) &&
+        (!('balanceToman' in request.resource.data) || request.resource.data.balanceToman <= 150000) &&
+        (!('totalCashWonToman' in request.resource.data) || request.resource.data.totalCashWonToman == 0);
+
+      // On update, user CANNOT modify financial or authority fields directly
+      // Sensitive fields (balanceToman, totalCashWonToman, role, isAdmin, totalPoints, wins) are strictly managed by Cloud Functions
+      allow update: if (isOwner(userId) && 
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'balanceToman', 'totalCashWonToman', 'role', 'isAdmin', 'totalPoints', 'wins', 'tournamentsPlayed', 'xp'
+        ])) || isAdmin();
+
+      allow delete: if false;
+    }
+
+    // Tournaments & Competitions
+    match /tournaments/{tournamentId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isAdmin(); // Only Admin can manage tournaments
+
+      // Questions subcollection
+      match /questions/{questionId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if isAdmin();
+      }
+
+      // Verified Score records per tournament:
+      // Client cannot write or manipulate scores directly! Only Cloud Functions (Admin SDK) can write scores.
+      match /scores/{userId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if false;
+      }
+    }
+
+    // Financial Transactions Ledger
+    // Only readable by the owner or Admin. Writes are strictly forbidden from client SDK (must go through Cloud Functions).
+    match /transactions/{transactionId} {
+      allow read: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update, delete: if false;
+    }
+
+    // Cash Prize Withdrawal Claims
+    match /withdrawals/{withdrawalId} {
+      allow read: if isAuthenticated() && (resource == null || resource.data.userId == request.auth.uid || isAdmin());
+      // Users can only submit initial pending withdrawal request
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid && request.resource.data.status == 'PENDING';
+      // Only server admin can approve or mark paid
+      allow update, delete: if isAdmin();
+    }
+  }
+}

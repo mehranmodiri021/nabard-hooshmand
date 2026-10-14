@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">چالش و مسابقه</string>
+    <string name="creator_name">سیدحمید موسوی زاده</string>
+    <string name="app_version">Version 1.0.0</string>
+    <string name="splash_created_by">ساخته شده توسط:</string>
+    <string name="splash_tagline">پلتفرم هوشمند مسابقات مهارتی و جوایز نقدی</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">خانه</string>
+    <string name="nav_tournaments">مسابقات</string>
+    <string name="nav_leaderboard">رتبه‌بندی</string>
+    <string name="nav_wallet">کیف پول</string>
+    <string name="nav_profile">پروفایل</string>
+
+    <!-- Home -->
+    <string name="home_active_tournaments">مسابقات فعال</string>
+    <string name="home_today_tournament">مسابقه امروز</string>
+    <string name="home_special_tournaments">مسابقات ویژه</string>
+    <string name="home_prizes">جوایز برتر</string>
+    <string name="home_user_rank">رتبه شما</string>
+    <string name="home_user_points">امتیاز کل</string>
+    <string name="home_user_balance">موجودی کیف پول</string>
+    <string name="home_currency">تومان</string>
+    <string name="home_points_unit">امتیاز</string>
+
+    <!-- Tournament Details & Action -->
+    <string name="join_tournament">شرکت در مسابقه</string>
+    <string name="entry_fee">ورودی:</string>
+    <string name="prize_pool">مجموع جایزه:</string>
+    <string name="participants">شرکت‌کنندگان:</string>
+    <string name="starts_in">شروع تا:</string>
+    <string name="free">رایگان</string>
+    <string name="tournament_category_all">همه</string>
+    <string name="tournament_category_free">رایگان</string>
+    <string name="tournament_category_vip">ویژه</string>
+    <string name="tournament_category_daily">روزانه</string>
+    <string name="tournament_category_weekly">هفتگی</string>
+    <string name="tournament_category_grand">مسابقات بزرگ</string>
+
+    <!-- Wallet -->
+    <string name="wallet_title">کیف پول هوشمند</string>
+    <string name="wallet_deposit">افزایش موجودی</string>
+    <string name="wallet_withdraw">درخواست دریافت جایزه</string>
+    <string name="wallet_transactions">سوابق مالی</string>
+    <string name="wallet_gateway_ready">اتصال به درگاه پرداخت شتاب (زرین‌پال / شاپرک)</string>
+
+    <!-- Profile -->
+    <string name="profile_level">سطح کاربری</string>
+    <string name="profile_tournaments_count">تعداد مسابقات</string>
+    <string name="profile_wins_count">تعداد بردها</string>
+    <string name="profile_win_rate">درصد پیروزی</string>
+    <string name="profile_medals">مدال‌ها و افتخارات</string>
+    <string name="profile_history">تاریخچه فعالیت</string>
+
+    <!-- Settings -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="settings_theme">حالت شب و روز</string>
+    <string name="settings_notifications">اعلان‌ها و یادآور مسابقات</string>
+    <string name="settings_sound">صدا و جلوه‌های صوتی</string>
+    <string name="settings_language">زبان برنامه (فارسی)</string>
+    <string name="settings_account">مدیریت حساب کاربری</string>
+    <string name="settings_security">تغییر رمز و امنیت</string>
+    <string name="settings_privacy">حریم خصوصی</string>
+    <string name="settings_rules">قوانین و ضوابط مسابقات</string>
+    <string name="settings_support">تماس با پشتیبانی</string>
+    <string name="settings_report">گزارش مشکل</string>
+    <string name="settings_about">درباره برنامه</string>
+
+    <!-- AI Feature -->
+    <string name="ai_challenge_generator">طراح چالش هوش مصنوعی</string>
+    <string name="ai_performance_analysis">تحلیل عملکرد هوشمند</string>
+</resources>

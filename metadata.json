@@ -1,0 +1,6 @@
+{
+  "name": "چالش و مسابقه",
+  "description": "پلتفرم پیشرفته مسابقات مهارتی و فکری، چالش‌های روزانه و هفتگی، جوایز نقدی، کیف پول داخلی، لیدربورد و هوش مصنوعی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
